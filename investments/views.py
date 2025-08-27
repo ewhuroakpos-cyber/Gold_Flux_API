@@ -172,6 +172,9 @@ class UserDepositListCreateView(generics.ListCreateAPIView):
     
     def get_queryset(self):
         return DepositRequest.objects.filter(user=self.request.user)
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class UserWithdrawalListCreateView(generics.ListCreateAPIView):
     serializer_class = WithdrawalRequestSerializer
@@ -179,6 +182,9 @@ class UserWithdrawalListCreateView(generics.ListCreateAPIView):
     
     def get_queryset(self):
         return WithdrawalRequest.objects.filter(user=self.request.user)
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class UserGoldLockListCreateView(generics.ListCreateAPIView):
     serializer_class = GoldLockSerializer
@@ -186,6 +192,9 @@ class UserGoldLockListCreateView(generics.ListCreateAPIView):
     
     def get_queryset(self):
         return GoldLock.objects.filter(user=self.request.user)
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 # Admin management views
 class AdminDepositListView(generics.ListAPIView):
